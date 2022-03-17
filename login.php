@@ -28,26 +28,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>kickAss Chat!</title>
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="styles/login.css">
 </head>
 <body>
-    <h1>kickAss Chat login!</h1>
-    <?php
-        if(isset($_GET["err"])){
-            $error_id = $_GET["err"];
-            if($error_id==0)    
-                echo("You need to login to see this page!<br><br>");
-            elseif($error_id==1)
-                echo("Username/ Password cannot be blank!<br><br>");
-            elseif($error_id==2)
-                echo("Username/ Password is wrong!<br><br>");
-        }
-    ?>
-    <form action="#" method="post">
-        <label>Username</label><br> 
-        <input type="text" name="username" id="username"><br><br>
-        <label>Password</label><br>
-        <input type="password" name="password" id="password"><br><br>
-        <input type="submit" name="login" value="Log in">
-    </form>
+    <div class="login">
+        <h1>kickAss Chat login!</h1>
+        <?php
+            if(isset($_GET["err"])){
+                $error_id = $_GET["err"];
+                if($error_id==0)    
+                    echo("<div class=error>You need to login to see this page!</div>");
+                elseif($error_id==1)
+                    echo("<div class=error>Username/ Password cannot be blank!</div>");
+                elseif($error_id==2)
+                    echo("<div class=error>Username/ Password is wrong!</div>");
+            }
+        ?>
+        <form action="#" method="post">
+            <input class="text-field" type="text" name="username" id="username" placeholder="Username"><br>
+            <input class="text-field" type="password" name="password" id="password" placeholder="Password"><br>
+            <input class="login-button" type="submit" name="login" value="Log in">
+        </form>
+            <a class="signup-button" href="signup.php">Sign up!</a>
+    </div>    
 </body>
 </html>
