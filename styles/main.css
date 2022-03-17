@@ -1,7 +1,24 @@
 body {
     font-family: Helvetica, sans-serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    margin: 0px;
+}
+
+p{
+    margin: 10px;
+    text-align: center;
+}
+
+.logout-button{
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: #dc3545;
+    color: white;
+    width: 90px;
 }
