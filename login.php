@@ -4,16 +4,20 @@
     if(isset($_POST["login"])){
         $username = mysqli_real_escape_string($conn, $_POST["username"]);
         $password = mysqli_real_escape_string($conn, $_POST["password"]);
+        
+        // Check if username or password is blank
         if(strlen($username)==0 || strlen($password)==0)
             header("Location:login.php?err=1");
-        $query = "SELECT * FROM login WHERE username='$username' AND password='$password'";
-        $result = $conn->query($query);
-        $row_count = $result->num_rows;
-        if($row_count==0)
-            header("Location:login.php?err=2");
         else{
-            $_SESSION["username"] = $username;
-            header("Location:index.php");
+            $query = "SELECT * FROM login WHERE username='$username' AND password='$password'";
+            $result = $conn->query($query);
+            $row_count = $result->num_rows;
+            if($row_count==0)
+                header("Location:login.php?err=2");
+            else{
+                $_SESSION["username"] = $username;
+                header("Location:index.php");
+            }
         }
     }
 ?>
