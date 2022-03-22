@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include("db.php");
+    include_once("db.php");
     if(isset($_POST["login"])){
         $username = mysqli_real_escape_string($conn, $_POST["username"]);
         $password = mysqli_real_escape_string($conn, $_POST["password"]);
@@ -15,8 +15,11 @@
             if($row_count==0)
                 header("Location:login.php?err=2");
             else{
+                $row = $result->fetch_assoc();
+                $_SESSION["id"] = $username.$row['id'];
                 $_SESSION["username"] = $username;
-                header("Location:index.php");
+                $conn->query("UPDATE login SET status=1 where username='$username'");
+                header("Location:users.php");
             }
         }
     }
