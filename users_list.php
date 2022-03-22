@@ -6,7 +6,7 @@
         $result = $conn -> query("SELECT id, username, status FROM login WHERE username!='$username'");
         while($row = $result->fetch_assoc()){?>
             <div class="user">
-            <a href="chat.php?recepient=<?php echo $row["username"].$row["id"]?>">
+            <a href="chat.php?receiver=<?php echo $row["username"]?>&&id=<?php echo $row["id"]?>">
                 <?php echo $row["username"];?>
                 <div class=<?php echo ($row['status']==0)?"status-away":"status-active"; ?>></div>
             </a>

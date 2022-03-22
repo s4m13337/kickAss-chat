@@ -1,5 +1,9 @@
+a{
+    text-decoration: none;
+    color: black;
+}
+
 .container{
-    background-color: aqua;
     width: 100%;
 }
 
@@ -11,6 +15,8 @@
     top: 0;
     width: 100%;
     gap: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .back{
@@ -31,6 +37,8 @@
     background-color: #eee;
     display: flex;
     flex-direction: column;
+    margin: 10vh 0;
+    padding: 2vh 0;
 }
 
 .incoming{
@@ -60,6 +68,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .message-form{
