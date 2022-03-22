@@ -7,8 +7,6 @@
     }
     $username = $_SESSION["username"];
     $session_id = $_SESSION["id"];
-    $query = "SELECT id, username FROM login WHERE username!='$username'";
-    $result = $conn -> query($query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,23 +26,17 @@
             <h3><?php echo ucfirst($username); ?></h3>
             <a href="logout.php" class="logout">Logout</a>
         </div>
-        <div class="users-list">
-            <?php 
-                while($row = $result->fetch_assoc()){?>
-                    <div class="user">
-                        <a href="chat.php?recepient=<?php echo $row["username"].$row["id"]?>">
-                            <?php echo $row["username"];?>
-                            <div class="status">Active</div>
-                        </a>
-                    </div>
-                <?php } 
-                echo $session_id;
-            ?>  
-        </div>
+        <div class="users-list"></div>
     </div>
     <script>
       feather.replace()
     </script>
-    <script src="scripts/ajax.js"></script>
+    <script>
+        setInterval(() => {
+            fetch("users_list.php")
+            .then(response => response.text())
+            .then(output => document.querySelector(".users-list").innerHTML = output)
+        }, 500);
+    </script>
 </body>
 </html>
