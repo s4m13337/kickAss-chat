@@ -28,7 +28,6 @@
             <i class="menu" data-feather="menu"></i>
         </div>
         <div class="chat-area">
-            <?php echo $_GET["id"]?>
         </div>
         <div class="message">
              <form action="#" method="post" class="message-form">
@@ -45,11 +44,13 @@
     <script>
         sendButton = document.querySelector(".send-button");
         message = document.querySelector(".message-input");
+        senderId = document.querySelector(".sender-id").value;
+        receiverId = document.querySelector(".receiver-id").value;
         sendButton.onclick = () => {
             if(message.value != ""){
                 let data = JSON.stringify({
-                    "sender_id": document.querySelector(".sender-id").value,
-                    "receiver_id": document.querySelector(".receiver-id").value,
+                    "sender_id": senderId,
+                    "receiver_id": receiverId,
                     "message": message.value
                 })
                 fetch("send_message.php", {
@@ -64,6 +65,25 @@
                 message.value="";
             }
         }
+
+        setInterval(
+            () => {
+                let data = JSON.stringify({
+                    "sender_id": senderId,
+                    "receiver_id": receiverId
+                })
+                fetch("refresh_messages.php", {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: data
+                })
+                .then(response => response.text())
+                .then(output => document.querySelector('.chat-area').innerHTML = output)
+            },
+            500
+        )
     </script>
 </body>
 </html>
