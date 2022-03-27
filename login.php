@@ -47,6 +47,11 @@
                 elseif($error_id==2)
                     echo("<div class=error>Username/ Password is wrong!</div>");
             }
+            if(isset($_GET["signup"])){
+                $signup_id = $_GET["signup"];
+                if($signup_id == 0)
+                    echo("<div class=success>Sign up successful! Login to use chat</div>");
+            }
         ?>
         <form action="#" method="post">
             <input class="text-field" type="text" name="username" id="username" placeholder="Username"><br>
