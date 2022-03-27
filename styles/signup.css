@@ -1,0 +1,39 @@
+.signup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    height: 280px;
+    width: 320px;
+}
+
+.username, .email, .password, .re-password, .signup-button{
+    appearance: none;
+    border: none;
+    background-color: #eee;
+    border-radius: 5px;
+    padding: 5px;
+    width: 200px;
+    height: 30px;
+    font-size: 11pt;
+    margin: 10px;
+}
+
+.signup-button{
+    text-decoration: none;
+    background-color: #dc3545;
+    color: white;
+    width: 90px;
+}
+
+.error{
+    background-color: #f8d7da;
+    padding: 10px;
+    text-align: center;;
+    border-radius: 5px;
+    color: #d9534f;
+}
+
+
+
