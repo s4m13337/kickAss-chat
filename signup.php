@@ -2,7 +2,7 @@
     include("db.php");
     if(isset($_POST["sign_up"])){
         $username = mysqli_real_escape_string($conn, $_POST["username"]);
-        
+
         // Check if username already exists
         $query = "SELECT * FROM login WHERE username='$username'";
         $result = $conn->query($query);
@@ -22,11 +22,11 @@
             header("Location:signup.php?err=3");
         
         // Add entry to database
-        $query = "INSERT INTO login (username, email, password) VALUES ('$username', '$email', '$password')";
+        $query = "INSERT INTO login (username, email, password, status) VALUES ('$username', '$email', '$password', 0)";
         if($conn->query($query) === TRUE)
-            header("Location:login.php");
+            header("Location:login.php?signup=0");
         else
-            header("Location:signup.php?err=4");
+            $error = $conn -> error;
     }   
 
 ?>
@@ -37,32 +37,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>kickAss chat Sign up</title>
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="styles/signup.css">
 </head>
 <body>
-    <h1>kickAss Chat! Sign up</h1>
-    <?php
-        if(isset($_GET["err"])){
-            $error_id = $_GET["err"];
-            if($error_id==1)    
-                echo("Username already exists! Please use a different username!<br><br>");
-            elseif($error_id==2)    
-                echo("Password does not match!<br><br>");
-            elseif($error_id==3)    
-                echo("Please fill all the fields!<br><br>");
-            else
-                echo("Error: Unknown error!<br><br>");
-        }
-    ?>
-    <form action="" method="post"
-        <label for="username">Username</label><br>
-        <input type="text" name="username"><br><br>
-        <label for="email">Email</label><br>
-        <input type="email" name="email"><br><br>
-        <label for="password">Password</label><br>
-        <input type="password" name="password"><br><br>
-        <label for="re_password">Re-enter password</label><br>
-        <input type="password" name="re_password"><br><br>
-        <input type="submit" name="sign_up" value="Sign up!">
-    </form>
+    <div class="signup">
+        <h1>kickAss Chat!</h1>
+        <h3>Sign up</h3>
+        <?php
+            if(isset($_GET["err"])){
+                $error_id = $_GET["err"];
+                if($error_id==1)    
+                    echo("<div class='error'>Username already taken! Please use a different username!</div>");
+                elseif($error_id==2)    
+                    echo("<div class='error'>Passwords do not match!</div>");
+                elseif($error_id==3)    
+                    echo("<div class='error'>Please fill all the fields!</div>");
+                else
+                    echo($error);
+            }
+        ?>
+        <form action="" method="post">
+            <input type="text" name="username" class="username" placeholder="Username"><br><br>
+            <input type="email" name="email" class="email" placeholder="Email"><br><br>
+            <input type="password" name="password" class="password" placeholder="Password"><br><br>
+            <input type="password" name="re_password" class="re-password" placeholder="Re-type password"><br><br>
+            <input type="submit" name="sign_up" value="Sign up!" class="signup-button">
+        </form>
+    </div>    
 </body>
 </html>
